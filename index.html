@@ -2,6 +2,8 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
+        <script src="https://kit.fontawesome.com/7220c352f8.js" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <link rel="stylesheet" href="style.css">
         <title>Esercitazione #28 - Boolzapp Web</title>
     </head>
@@ -10,35 +12,206 @@
             <div id="app-window">
                 <div id="account-window">
                     <div id="account-bar">
-
+                        <div class="portrait-small">
+                            <img src="https://findicons.com/files/icons/1072/face_avatars/300/i01.png" alt="Avatar">
+                        </div>
+                        <div class="menu-option">
+                            <i class="fas fa-redo-alt"></i>
+                            <i class="fas fa-comment-alt"></i>
+                            <i class="fas fa-ellipsis-v"></i>
+                        </div>
                     </div>
                     <div id="notification-alert">
-
+                        <div id="disable-icon">
+                            <i class="fas fa-bell-slash"></i>
+                        </div>
+                        <div id="notification-text">
+                            <p>Ricevi notifiche di nuovi messaggi</p>
+                            <a href="#">Attiva notifiche desktop</a>
+                        </div>
                     </div>
                     <div id="search-bar">
-
+                        <i class="fas fa-search"></i>
+                        <input type="text" name="" value="">
                     </div>
                     <div id="chat-item-container">
                         <div class="chat-item current">
-                            <p>paul</p>
+                            <div class="chat-preview">
+                                <div class="portrait">
+                                    <img src="https://findicons.com/files/icons/1072/face_avatars/300/l01.png" alt="Avatar">
+                                </div>
+                                <div class="preview-wrapper">
+                                    <div class="preview-name-time">
+                                        <div class="preview-name">
+                                            <p>Cloud Strife</p>
+                                        </div>
+                                        <div class="preview-time">
+                                            <p>07:45</p>
+                                        </div>
+                                    </div>
+                                    <div class="preview-message">
+                                        <p>Ok, ci vediamo al Reattore</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="chat-item">
-                            <p>paul</p>
+                            <div class="chat-preview">
+                                <div class="portrait">
+                                    <img src="https://findicons.com/files/icons/1072/face_avatars/300/fh04.png" alt="Avatar">
+                                </div>
+                                <div class="preview-wrapper">
+                                    <div class="preview-name-time">
+                                        <div class="preview-name">
+                                            <p>Lara Croft</p>
+                                        </div>
+                                        <div class="preview-time">
+                                            <p>22:11</p>
+                                        </div>
+                                    </div>
+                                    <div class="preview-message">
+                                        <p>Hai aperto al maggiordomo Smith?</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="chat-item">
-                            <p>paul</p>
+                            <div class="chat-preview">
+                                <div class="portrait">
+                                    <img src="https://findicons.com/files/icons/1072/face_avatars/300/e05.png" alt="Avatar">
+                                </div>
+                                <div class="preview-wrapper">
+                                    <div class="preview-name-time">
+                                        <div class="preview-name">
+                                            <p>Minsc</p>
+                                        </div>
+                                        <div class="preview-time">
+                                            <p>08:10</p>
+                                        </div>
+                                    </div>
+                                    <div class="preview-message">
+                                        <p>Hai visto Boo?</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat-item">
+                            <div class="chat-preview">
+                                <div class="portrait">
+                                    <img src="https://findicons.com/files/icons/1072/face_avatars/300/d04.png" alt="Avatar">
+                                </div>
+                                <div class="preview-wrapper">
+                                    <div class="preview-name-time">
+                                        <div class="preview-name">
+                                            <p>Solid Snake</p>
+                                        </div>
+                                        <div class="preview-time">
+                                            <p>23:59</p>
+                                        </div>
+                                    </div>
+                                    <div class="preview-message">
+                                        <p>Kept you waiting, uh?</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat-item">
+                            <div class="chat-preview">
+                                <div class="portrait">
+                                    <img src="https://findicons.com/files/icons/1072/face_avatars/300/e04.png" alt="">
+                                </div>
+                                <div class="preview-wrapper">
+                                    <div class="preview-name-time">
+                                        <div class="preview-name">
+                                            <p>Kazuma Kiryu</p>
+                                        </div>
+                                        <div class="preview-time">
+                                            <p>16:22</p>
+                                        </div>
+                                    </div>
+                                    <div class="preview-message">
+                                        <p>Ti aspetto a Kamurocho</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat-item">
+                            <div class="chat-preview">
+                                <div class="portrait">
+                                    <img src="https://findicons.com/files/icons/1072/face_avatars/300/fh03.png" alt="Avatar">
+                                </div>
+                                <div class="preview-wrapper">
+                                    <div class="preview-name-time">
+                                        <div class="preview-name">
+                                            <p>Yennefer di vengerberg</p>
+                                        </div>
+                                        <div class="preview-time">
+                                            <p>22:32</p>
+                                        </div>
+                                    </div>
+                                    <div class="preview-message">
+                                        <p>Aspetto il profumo di uva spina</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat-item">
+                            <div class="chat-preview">
+                                <div class="portrait">
+                                    <img src="https://findicons.com/files/icons/1072/face_avatars/300/n05.png" alt="Avatar">
+                                </div>
+                                <div class="preview-wrapper">
+                                    <div class="preview-name-time">
+                                        <div class="preview-name">
+                                            <p>Mordin Solus</p>
+                                        </div>
+                                        <div class="preview-time">
+                                            <p>11:22</p>
+                                        </div>
+                                    </div>
+                                    <div class="preview-message">
+                                        <p>Ho finito la ricerca</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+
                 <div class="chat-window">
                     <div class="chat-title-bar">
-                        <p>NOME/COGNOME</p>
+                        <div class="chat-title-left">
+                            <div class="portrait">
+                                <img src="https://findicons.com/files/icons/1072/face_avatars/300/l01.png" alt="Avatar">
+                            </div>
+                            <div class="chat-title-text">
+                                <p>Cloud Strife</p>
+                                <p>Ultimo accesso oggi alle 08:12</p>
+                            </div>
+
+                        </div>
+                        <div class="menu-option">
+                            <i class="fas fa-search"></i>
+                            <i class="fas fa-paperclip"></i>
+                            <i class="fas fa-ellipsis-v"></i>
+                        </div>
                     </div>
                     <div class="chat-box">
-                        <p>text</p>
+                        <div id="container-chat-box" class="clearfix">
+                            <div class="chat-utente-1">
+                                <p>sjfafadsfjdsafòkadsfasj</p>
+                                <p class="chat-time-message">12:22</p>
+                            </div>
+                            <div class="chat-utente-2">
+                                <p>sjfafadsfjdsafòkadsfasj</p>
+                                <p class="chat-time-message">12:22</p>
+                            </div>
+                        </div>
                     </div>
                     <div class="text-box">
-                        <p>Scrivi il tuo testo</p>
+                        <i class="far fa-smile"></i>
+                        <input type="text" name="" value="">
+                        <i class="fas fa-microphone"></i>
                     </div>
                 </div>
             </div>
