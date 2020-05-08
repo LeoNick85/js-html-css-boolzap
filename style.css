@@ -24,9 +24,8 @@ main::after {
 }
 
 #app-window {
-    width: 900px;
+    width: 1000px;
     height: 550px;
-    border: 1px solid black;
     z-index: 2;
 }
 
@@ -34,12 +33,59 @@ main::after {
     float: left;
     width: 35%;
     height: 100%;
-    background-color: blue;
+    background-color: white;
+    border-right: 1px solid #dad6d3;
 }
 
 .chat-window {
     float: left;
     width: 65%;
     height: 100%;
-    background-color: red;
+    background-color: white;
+}
+
+#account-bar {
+    height: 50px;
+    background-color: #eaeaea;
+}
+
+#notification-alert {
+    height: 70px;
+    background-color: #8edafc;
+}
+
+#search-bar {
+    height: 39px;
+    background-color: white;
+    border-bottom: 1px solid #dad6d3;
+}
+
+#chat-item-container {
+    height: calc(550px - 50px - 70px - 40px);
+    overflow-y: scroll;
+}
+
+.chat-item {
+    height: 60px;
+}
+
+.chat-item.current {
+    background-color: #e9ebea;
+}
+
+.chat-title-bar {
+    height: 50px;
+    background-color: #eaeaea;
+}
+
+.chat-box {
+    height: calc(550px - 50px - 50px);
+    background-image: url("img/wallpaper.jpg");
+    background-size: contain;
+    overflow-y: scroll;
+}
+
+.text-box {
+    height: 50px;
+    background-color: #f3eeea;
 }
