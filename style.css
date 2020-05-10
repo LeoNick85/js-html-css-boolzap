@@ -2,6 +2,7 @@
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
 }
 
 .clearfix::after {
@@ -117,6 +118,17 @@ main::after {
     height: 39px;
     background-color: white;
     border-bottom: 1px solid #dad6d3;
+    color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+}
+
+#contacts-search {
+    border: 0px;
+    height: 100%;
+    width: 100%;
+    padding: 0 16px;
 }
 
 #chat-item-container {
@@ -218,6 +230,7 @@ main::after {
     clear: both;
     margin-top: 15px;
     border-radius: 6px;
+    font-size: 12px;
 }
 
 .chat-utente-1::after {
@@ -237,6 +250,7 @@ main::after {
     font-size: 8px;
     bottom: 4px;
     right: 6px;
+    color: rgba(0, 0, 0, 0.5);
 }
 
 .chat-utente-2 {
@@ -247,6 +261,7 @@ main::after {
     clear: both;
     margin-top: 6px;
     border-radius: 6px;
+    font-size: 12px;
 }
 
 .chat-utente-2::after {
@@ -263,4 +278,20 @@ main::after {
 .text-box {
     height: 50px;
     background-color: #f3eeea;
+    display: flex;
+    align-items: center;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.text-box i {
+    padding: 0px 22px;
+}
+
+#write-text-box {
+    padding: 8px;
+    height: 40px;
+    width: 100%;
+    border-radius: 2px;
+    font-size: 13px;
+    border: 0px;
 }
