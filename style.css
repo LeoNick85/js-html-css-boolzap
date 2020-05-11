@@ -11,6 +11,10 @@
     display: table;
 }
 
+i {
+    cursor: pointer;
+}
+
 main {
     background-color: #d2d4c9;
     width: 100vw;
@@ -231,6 +235,7 @@ main::after {
     margin-top: 15px;
     border-radius: 6px;
     font-size: 12px;
+    word-wrap: normal;
 }
 
 .chat-utente-1::after {
@@ -262,6 +267,7 @@ main::after {
     margin-top: 6px;
     border-radius: 6px;
     font-size: 12px;
+    word-wrap: normal;
 }
 
 .chat-utente-2::after {
@@ -294,4 +300,16 @@ main::after {
     border-radius: 2px;
     font-size: 13px;
     border: 0px;
+}
+
+.fa-paper-plane {
+    display: none;
+}
+
+.fa-paper-plane:hover {
+    color: #358675;
+}
+
+.template {
+    display: none;
 }
