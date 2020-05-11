@@ -226,19 +226,30 @@ main::after {
     margin: auto;
 }
 
-.chat-utente-1 {
+.chat-utente {
     position: relative;
     background-color: #d5f9b9;
     padding: 16px;
-    float: right;
-    clear: both;
     margin-top: 15px;
     border-radius: 6px;
     font-size: 12px;
     word-wrap: normal;
 }
 
-.chat-utente-1::after {
+.chat-right {
+    background-color: #d5f9b9;
+    float: right;
+    clear: both;
+}
+
+.chat-left {
+    background-color: white;
+    float: left;
+    clear: both;
+}
+
+
+.chat-right::after {
     position: absolute;
     content: "";
     width: 8px;
@@ -249,28 +260,8 @@ main::after {
     transform: rotate(45deg);
 }
 
-.chat-time-message {
-    position: absolute;
-    text-align: right;
-    font-size: 8px;
-    bottom: 4px;
-    right: 6px;
-    color: rgba(0, 0, 0, 0.5);
-}
 
-.chat-utente-2 {
-    position: relative;
-    background-color: white;
-    padding: 16px;
-    float: left;
-    clear: both;
-    margin-top: 6px;
-    border-radius: 6px;
-    font-size: 12px;
-    word-wrap: normal;
-}
-
-.chat-utente-2::after {
+.chat-left::after {
     position: absolute;
     content: "";
     width: 8px;
@@ -279,6 +270,15 @@ main::after {
     left: -5px;
     background-color: white;
     transform: rotate(45deg);
+}
+
+.chat-time-message {
+    position: absolute;
+    text-align: right;
+    font-size: 8px;
+    bottom: 4px;
+    right: 6px;
+    color: rgba(0, 0, 0, 0.5);
 }
 
 .text-box {

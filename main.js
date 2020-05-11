@@ -17,13 +17,10 @@ $(".text-box .fa-paper-plane").click(addTextInChat);
 
 
 //FUNZIONI
-
 //Funzione per inserire testo nella chat
 function addTextInChat() {
-    var elementToAdd = $(".template .chat-utente-1").clone();
-    console.log(elementToAdd);
+    var elementToAdd = $(".template .chat-right").clone();
     var messageToAdd = $("#write-text-box").val();
-    console.log(messageToAdd);
 
     //Preparo il messaggio con HTML e lo aggiungo alla chat
     var finalMessage = elementToAdd.text(messageToAdd);
