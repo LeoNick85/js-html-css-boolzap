@@ -1,9 +1,32 @@
 //SCRIPT PER RICERCA CONTATTI
+//Aggiorno la ricerca dei contatti ogni volta che viene aggiunto un carattere all'input
+$("#contacts-search").keyup(function(){
+    //Calcolo il numero totale dei contatti presenti e registro l'input attuale
+    var tot_contact_number = $("#chat-item-container").children().length;
+    console.log("Numero contatti " + tot_contact_number);
+    var current_input = $("#contacts-search").val();
+    console.log(current_input);
 
+    //Con each verifico nome per nome se rientra nella ricerca
+    $("#chat-item-container .chat-item").each(function() {
+        var contact_element = $(this);
+        console.log(contact_element);
+        var contact_element_name = contact_element.find(".preview-name p").text().toLowerCase();
+        console.log(contact_element_name);
+
+        if (current_input == "") {
+            $(this).show();
+        } else if (contact_element_name.includes(current_input)){
+            $(this).show();
+        } else {
+            $(this).hide();
+        }
+    })
+})
 
 //SCRIPT PER MESSAGGI
 //Creo una variabile con le possibili risposte dell'interlocutore in un array
-var chat_answers = ["Ok","Non saprei","Sono d'accordo","Non penso proprio","Credo che la risposta sia 42"];
+var chat_answers = ["Ok","Non saprei","Sono d'accordo","Non penso proprio","Credo che la risposta sia 42","Ci hai pensato bene?"];
 
 //Modifico il pulsante da microfono a Invia se la casella di testa viene attivata
 $("#write-text-box").focus(function(){
@@ -12,7 +35,7 @@ $("#write-text-box").focus(function(){
 });
 
 //Aggiungo un messaggio alla chat quando viene premuto Enter
-$("#write-text-box").keydown(function(event){
+$("#write-text-box").keypress(function(event){
     if (event.which == 13) {
         addTextInChat();
     }
