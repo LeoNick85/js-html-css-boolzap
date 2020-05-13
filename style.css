@@ -145,6 +145,7 @@ main::after {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    cursor: pointer;
 }
 
 .chat-item.current {
