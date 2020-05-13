@@ -91,8 +91,8 @@ for (var i = 0; i < conversation_log[0].length; i++) {
         var timeMessageToAdd = conversation_log[0][i][1];
 
         //Preparo il messaggio con HTML e lo aggiungo alla chat
-        elementToAdd.find("p:first-child").text(messageToAdd);
-        elementToAdd.find("p:last-child").text(timeMessageToAdd);
+        elementToAdd.find(".message-text").text(messageToAdd);
+        elementToAdd.find("p.chat-time-message").text(timeMessageToAdd);
         elementToAdd.addClass("chat-right");
         elementToAdd.appendTo("#container-chat-box");
     } else {
@@ -101,8 +101,8 @@ for (var i = 0; i < conversation_log[0].length; i++) {
         var timeMessageToAdd = conversation_log[0][i][1];
 
         //Preparo il messaggio con HTML e lo aggiungo alla chat
-        elementToAdd.find("p:first-child").text(messageToAdd);
-        elementToAdd.find("p:last-child").text(timeMessageToAdd);
+        elementToAdd.find(".message-text").text(messageToAdd);
+        elementToAdd.find("p.chat-time-message").text(timeMessageToAdd);
         elementToAdd.addClass("chat-left");
         elementToAdd.appendTo("#container-chat-box");
     }
@@ -140,8 +140,8 @@ $(".chat-item").click(function(){
                 var timeMessageToAdd = conversation_log[nth_current_chat][i][1];
 
                 //Preparo il messaggio con HTML e lo aggiungo alla chat
-                elementToAdd.find("p:first-child").text(messageToAdd);
-                elementToAdd.find("p:last-child").text(timeMessageToAdd);
+                elementToAdd.find(".message-text").text(messageToAdd);
+                elementToAdd.find("p.chat-time-message").text(timeMessageToAdd);
                 elementToAdd.addClass("chat-right");
                 elementToAdd.appendTo("#container-chat-box");
             } else {
@@ -150,8 +150,8 @@ $(".chat-item").click(function(){
                 var timeMessageToAdd = conversation_log[nth_current_chat][i][1];
 
                 //Preparo il messaggio con HTML e lo aggiungo alla chat
-                elementToAdd.find("p:first-child").text(messageToAdd);
-                elementToAdd.find("p:last-child").text(timeMessageToAdd);
+                elementToAdd.find(".message-text").text(messageToAdd);
+                elementToAdd.find("p.chat-time-message").text(timeMessageToAdd);
                 elementToAdd.addClass("chat-left");
                 elementToAdd.appendTo("#container-chat-box");
             }
@@ -187,6 +187,51 @@ $(".text-box .fa-paper-plane").click(addTextInChat);
 
 
 //SCRIPT PER SOTTOMENU MESSAGGI
+//Faccio comparire il sottomenu al click sulla freccia
+$(document).on("click", ".chat-utente .fa-angle-down", function(){
+    $(this).siblings(".message-hidden-menu").show();
+});
+
+//PROVVISORIO: Chiudo sottomenu con message info
+$(document).on("click", ".message-hidden-menu p:first-child", function(){
+    $(this).parent(".message-hidden-menu").hide();
+});
+
+//Cancello il messaggio con remove message
+$(document).on("click", ".message-hidden-menu p:nth-child(2)", function(){
+    var chat_element_index = $(this).closest(".chat-utente").index();
+
+    //Rimuovo il messaggio dal conversation_log
+    conversation_log[nth_current_chat].splice(chat_element_index, 1);
+    console.log(conversation_log);
+
+    //Svuoto la chat e ricarico gli elementi della pagina dopo la cancellazione
+    $("#container-chat-box").html("");
+    for (var i = 0; i < conversation_log[nth_current_chat].length; i++) {
+        //verifico se il messaggio è ricevuto o mandato e lo inserisco
+        if (conversation_log[nth_current_chat][i][2] == ".chat-right") {
+            var elementToAdd = $(".template .chat-utente").clone();
+            var messageToAdd = conversation_log[nth_current_chat][i][0];
+            var timeMessageToAdd = conversation_log[nth_current_chat][i][1];
+
+            //Preparo il messaggio con HTML e lo aggiungo alla chat
+            elementToAdd.find(".message-text").text(messageToAdd);
+            elementToAdd.find("p.chat-time-message").text(timeMessageToAdd);
+            elementToAdd.addClass("chat-right");
+            elementToAdd.appendTo("#container-chat-box");
+        } else {
+            var elementToAdd = $(".template .chat-utente").clone();
+            var messageToAdd = conversation_log[nth_current_chat][i][0];
+            var timeMessageToAdd = conversation_log[nth_current_chat][i][1];
+
+            //Preparo il messaggio con HTML e lo aggiungo alla chat
+            elementToAdd.find(".message-text").text(messageToAdd);
+            elementToAdd.find("p.chat-time-message").text(timeMessageToAdd);
+            elementToAdd.addClass("chat-left");
+            elementToAdd.appendTo("#container-chat-box");
+        }
+    }
+});
 
 //FUNZIONI
 //Funzione per inserire testo nella chat
@@ -204,8 +249,8 @@ function addTextInChat() {
     var currentTime = currentHour + ":" + currentMinute;
 
     //Preparo il messaggio con HTML e lo aggiungo alla chat
-    elementToAdd.find("p:first-child").text(messageToAdd);
-    elementToAdd.find("p:last-child").text(currentTime);
+    elementToAdd.find(".message-text").text(messageToAdd);
+    elementToAdd.find("p.chat-time-message").text(currentTime);
     elementToAdd.addClass("chat-right");
     elementToAdd.appendTo("#container-chat-box");
 
@@ -217,8 +262,8 @@ function addTextInChat() {
     //Prendo un messaggio casuale dall'array delle risposte e lo aggiungo come risposta dell'altro utente, con un ritardo di 1 minuto
     var random_answer = chat_answers[getRandom(0, (chat_answers.length - 1))];
     var answerToAdd =  $(".template .chat-utente").clone();
-    answerToAdd.find("p:first-child").text(random_answer);
-    answerToAdd.find("p:last-child").text(currentTime);
+    answerToAdd.find(".message-text").text(random_answer);
+    answerToAdd.find("p.chat-time-message").text(currentTime);
     answerToAdd.addClass("chat-left");
     setTimeout (function(){
         answerToAdd.appendTo("#container-chat-box");
