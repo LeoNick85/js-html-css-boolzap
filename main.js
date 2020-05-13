@@ -80,8 +80,35 @@ var conversation_log = [
     ["OK","07:31",".chat-left"],
     ["Ho finito la ricerca","07:32",".chat-left"]
 ]
-]
+];
 
+//Ad avvio pagina carico il contenuto della prima chat
+for (var i = 0; i < conversation_log[0].length; i++) {
+    //verifico se il messaggio è ricevuto o mandato e lo inserisco
+    if (conversation_log[0][i][2] == ".chat-right") {
+        var elementToAdd = $(".template .chat-utente").clone();
+        var messageToAdd = conversation_log[0][i][0];
+        var timeMessageToAdd = conversation_log[0][i][1];
+
+        //Preparo il messaggio con HTML e lo aggiungo alla chat
+        elementToAdd.find("p:first-child").text(messageToAdd);
+        elementToAdd.find("p:last-child").text(timeMessageToAdd);
+        elementToAdd.addClass("chat-right");
+        elementToAdd.appendTo("#container-chat-box");
+    } else {
+        var elementToAdd = $(".template .chat-utente").clone();
+        var messageToAdd = conversation_log[0][i][0];
+        var timeMessageToAdd = conversation_log[0][i][1];
+
+        //Preparo il messaggio con HTML e lo aggiungo alla chat
+        elementToAdd.find("p:first-child").text(messageToAdd);
+        elementToAdd.find("p:last-child").text(timeMessageToAdd);
+        elementToAdd.addClass("chat-left");
+        elementToAdd.appendTo("#container-chat-box");
+    }
+}
+
+var nth_current_chat = 0;
 
 //SCRIPT PER CAMBIO CHAT TRA ACCOUNT
 //Riscrivo gli elementi della chat corrente(barra titolo + messaggi chat), appena clicco una chat differente
@@ -103,7 +130,7 @@ $(".chat-item").click(function(){
         $("#container-chat-box").html("");
 
         //Creo un ciclo for per ripubblicare in sequenza tutti gli elementi nella conversazione
-        var nth_current_chat = $(this).index();
+        nth_current_chat = $(this).index();
 
         for (var i = 0; i < conversation_log[nth_current_chat].length; i++) {
             //verifico se il messaggio è ricevuto o mandato e lo inserisco
@@ -167,19 +194,41 @@ function addTextInChat() {
     var elementToAdd = $(".template .chat-utente").clone();
     var messageToAdd = $("#write-text-box").val();
 
+    //Registro l'ora corrente
+    var d = new Date();
+    var currentHour = d.getHours();
+    var currentMinute = d.getMinutes();
+    if (currentMinute < 10) {
+        currentMinute = "0" + currentMinute;
+    }
+    var currentTime = currentHour + ":" + currentMinute;
+
     //Preparo il messaggio con HTML e lo aggiungo alla chat
     elementToAdd.find("p:first-child").text(messageToAdd);
+    elementToAdd.find("p:last-child").text(currentTime);
     elementToAdd.addClass("chat-right");
     elementToAdd.appendTo("#container-chat-box");
+
+
+    //Aggiorno il conversation_log col messaggio inviato
+    var arrayToAdd = [messageToAdd, currentTime, ".chat-right"];
+    conversation_log[nth_current_chat].push(arrayToAdd);
 
     //Prendo un messaggio casuale dall'array delle risposte e lo aggiungo come risposta dell'altro utente, con un ritardo di 1 minuto
     var random_answer = chat_answers[getRandom(0, (chat_answers.length - 1))];
     var answerToAdd =  $(".template .chat-utente").clone();
     answerToAdd.find("p:first-child").text(random_answer);
+    answerToAdd.find("p:last-child").text(currentTime);
     answerToAdd.addClass("chat-left");
     setTimeout (function(){
         answerToAdd.appendTo("#container-chat-box");
+        //Aggiorno il conversation_log con la risposta
+        var arrayAnswerToAdd = [random_answer, currentTime, ".chat-left"];
+        conversation_log[nth_current_chat].push(arrayAnswerToAdd);
     }, 1000);
+
+
+    console.log(conversation_log);
 
     //Ripristino il pulsante microfono fino a prossimo focus su box
     $(".text-box .fa-microphone").show();
