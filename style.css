@@ -229,12 +229,12 @@ main::after {
 
 .chat-utente {
     position: relative;
-    background-color: #d5f9b9;
+    max-width: 100%;
     padding: 16px;
     margin-top: 15px;
     border-radius: 6px;
     font-size: 12px;
-    word-wrap: normal;
+    word-wrap: break-word;
 }
 
 .chat-right {

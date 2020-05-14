@@ -20,99 +20,88 @@ $("#contacts-search").keyup(function(){
     })
 })
 
+//DATABASE UTENTI
+//Creo un array con la lista degli utenti (nome,indirizzo immagine,ordine)
+var account_list = [
+    ["Cloud Strife", "https://findicons.com/files/icons/1072/face_avatars/300/l01.png", 0],
+    ["Lara Croft", "https://findicons.com/files/icons/1072/face_avatars/300/fh04.png", 1],
+    ["Minsc", "https://findicons.com/files/icons/1072/face_avatars/300/e05.png", 2],
+    ["Solid Snake", "https://findicons.com/files/icons/1072/face_avatars/300/d04.png", 3],
+    ["Kazuma Kiryu", "https://findicons.com/files/icons/1072/face_avatars/300/e04.png", 4],
+    ["Yennifer di Vengerberg", "https://findicons.com/files/icons/1072/face_avatars/300/fh03.png", 5],
+    ["Mordin Solus", "https://findicons.com/files/icons/1072/face_avatars/300/n05.png", 6]
+]
 
 //DATABASE CONVERSAZIONI
-//Creo un array che tiene in memoria le conversazioni
+//Creo un array che tiene in memoria le conversazioni(messaggio,ora,mandato/ricevuto)
 var conversation_log = [
 //Prima Chat(Cloud Strife)
 [
-    ["Hai ricevuto i dettagli della missione da Barret?","05:21",".chat-right"],
-    ["Sì, mi sono arrivati ieri","06:32",".chat-left"],
-    ["Hai preparato tutto? Ci vediamo all'ora prevista al Reattore?","06:52",".chat-right"],
-    ["Sì, tutto pronto","07:31",".chat-left"],
-    ["Ok, ci vediamo al Reattore","07:32",".chat-left"]
+    ["Hai ricevuto i dettagli della missione da Barret?", "July 21, 1983 01:15:00",".chat-right"],
+    ["Sì, mi sono arrivati ieri", "July 21, 1983 01:15:00",".chat-left"],
+    ["Hai preparato tutto? Ci vediamo all'ora prevista al Reattore?", "July 21, 1983 01:15:00",".chat-right"],
+    ["Sì, tutto pronto", "July 21, 1983 01:15:00",".chat-left"],
+    ["Ok, ci vediamo al Reattore", "July 21, 1983 01:15:00",".chat-left"]
 ],
 //Seconda Chat(Lara Croft)
 [
-    ["Hai trovato il sito archeologico","05:21",".chat-right"],
-    ["Sì, ci troviamo lì","06:32",".chat-left"],
-    ["Va bene, allora parto da casa adesso","06:52",".chat-right"],
-    ["OK","07:31",".chat-left"],
-    ["Hai aperto al maggiordomo Smith?","07:32",".chat-left"]
+    ["Hai trovato il sito archeologico", "July 21, 1983 01:15:00",".chat-right"],
+    ["Sì, ci troviamo lì", "July 21, 1983 01:15:00",".chat-left"],
+    ["Va bene, allora parto da casa adesso", "July 21, 1983 01:15:00",".chat-right"],
+    ["OK", "July 21, 1983 01:15:00",".chat-left"],
+    ["Hai aperto al maggiordomo Smith?", "July 21, 1983 01:15:00",".chat-left"]
 ],
 //Terza Chat(Minsc)
 [
-    ["Hai trovato il sito archeologico","05:21",".chat-right"],
-    ["Sì, ci troviamo lì","06:32",".chat-left"],
-    ["Va bene, allora parto da casa adesso","06:52",".chat-right"],
-    ["OK","07:31",".chat-left"],
-    ["Hai visto Boo?","07:32",".chat-left"]
+    ["Hai trovato il sito archeologico", "July 21, 1983 01:15:00",".chat-right"],
+    ["Sì, ci troviamo lì", "July 21, 1983 01:15:00",".chat-left"],
+    ["Va bene, allora parto da casa adesso", "July 21, 1983 01:15:00",".chat-right"],
+    ["OK", "July 21, 1983 01:15:00",".chat-left"],
+    ["Hai visto Boo?", "July 21, 1983 01:15:00",".chat-left"]
 ],
 //Quarta Chat(Solid Snake)
 [
-    ["Hai trovato il sito archeologico","05:21",".chat-right"],
-    ["Sì, ci troviamo lì","06:32",".chat-left"],
-    ["Va bene, allora parto da casa adesso","06:52",".chat-right"],
-    ["OK","07:31",".chat-left"],
-    ["Kept you waiting?","07:32",".chat-left"]
+    ["Hai trovato il sito archeologico", "July 21, 1983 01:15:00",".chat-right"],
+    ["Sì, ci troviamo lì", "July 21, 1983 01:15:00",".chat-left"],
+    ["Va bene, allora parto da casa adesso", "July 21, 1983 01:15:00",".chat-right"],
+    ["OK", "July 21, 1983 01:15:00",".chat-left"],
+    ["Kept you waiting?", "July 21, 1983 01:15:00",".chat-left"]
 ],
 //Quinta Chat(Kazuma Kiryu)
 [
-    ["Hai trovato il sito archeologico","05:21",".chat-right"],
-    ["Sì, ci troviamo lì","06:32",".chat-left"],
-    ["Va bene, allora parto da casa adesso","06:52",".chat-right"],
-    ["OK","07:31",".chat-left"],
-    ["Ti aspetto a Kamurocho","07:32",".chat-left"]
+    ["Hai trovato il sito archeologico", "July 21, 1983 01:15:00",".chat-right"],
+    ["Sì, ci troviamo lì", "July 21, 1983 01:15:00",".chat-left"],
+    ["Va bene, allora parto da casa adesso", "July 21, 1983 01:15:00",".chat-right"],
+    ["OK", "July 21, 1983 01:15:00",".chat-left"],
+    ["Ti aspetto a Kamurocho", "July 21, 1983 01:15:00",".chat-left"]
 ],
 //Sesta Chat(Yennifer di Vengerberg)
 [
-    ["Hai trovato il sito archeologico","05:21",".chat-right"],
-    ["Sì, ci troviamo lì","06:32",".chat-left"],
-    ["Va bene, allora parto da casa adesso","06:52",".chat-right"],
-    ["OK","07:31",".chat-left"],
-    ["Aspetto il profumo di uva spina","07:32",".chat-left"]
+    ["Hai trovato il sito archeologico", "July 21, 1983 01:15:00",".chat-right"],
+    ["Sì, ci troviamo lì", "July 21, 1983 01:15:00",".chat-left"],
+    ["Va bene, allora parto da casa adesso", "July 21, 1983 01:15:00",".chat-right"],
+    ["OK", "July 21, 1983 01:15:00",".chat-left"],
+    ["Aspetto il profumo di uva spina", "July 21, 1983 01:15:00",".chat-left"]
 ],
 //Settima Chat(Mordin Solus)
 [
-    ["Hai trovato il sito archeologico","05:21",".chat-right"],
-    ["Sì, ci troviamo lì","06:32",".chat-left"],
-    ["Va bene, allora parto da casa adesso","06:52",".chat-right"],
-    ["OK","07:31",".chat-left"],
-    ["Ho finito la ricerca","07:32",".chat-left"]
+    ["Hai trovato il sito archeologico", "July 21, 1983 01:15:00",".chat-right"],
+    ["Sì, ci troviamo lì", "July 21, 1983 01:15:00",".chat-left"],
+    ["Va bene, allora parto da casa adesso", "July 21, 1983 01:15:00",".chat-right"],
+    ["OK", "July 21, 1983 01:15:00",".chat-left"],
+    ["Ho finito la ricerca", "July 21, 1983 01:15:00",".chat-left"]
 ]
 ];
 
-//Ad avvio pagina carico il contenuto della prima chat
-for (var i = 0; i < conversation_log[0].length; i++) {
-    //verifico se il messaggio è ricevuto o mandato e lo inserisco
-    if (conversation_log[0][i][2] == ".chat-right") {
-        var elementToAdd = $(".template .chat-utente").clone();
-        var messageToAdd = conversation_log[0][i][0];
-        var timeMessageToAdd = conversation_log[0][i][1];
-
-        //Preparo il messaggio con HTML e lo aggiungo alla chat
-        elementToAdd.find(".message-text").text(messageToAdd);
-        elementToAdd.find("p.chat-time-message").text(timeMessageToAdd);
-        elementToAdd.addClass("chat-right");
-        elementToAdd.appendTo("#container-chat-box");
-    } else {
-        var elementToAdd = $(".template .chat-utente").clone();
-        var messageToAdd = conversation_log[0][i][0];
-        var timeMessageToAdd = conversation_log[0][i][1];
-
-        //Preparo il messaggio con HTML e lo aggiungo alla chat
-        elementToAdd.find(".message-text").text(messageToAdd);
-        elementToAdd.find("p.chat-time-message").text(timeMessageToAdd);
-        elementToAdd.addClass("chat-left");
-        elementToAdd.appendTo("#container-chat-box");
-    }
-}
-
+//Ad avvio pagina genero la lista contatti, carico il contenuto della prima chat e la segno attiva nella lista dei CONTATTI
+printAccounts(account_list, conversation_log);
+$("#chat-item-container .chat-item:first-child").addClass("current");
 var nth_current_chat = 0;
+printChat(nth_current_chat);
 
 //SCRIPT PER CAMBIO CHAT TRA ACCOUNT
 //Riscrivo gli elementi della chat corrente(barra titolo + messaggi chat), appena clicco una chat differente
-$(".chat-item").click(function(){
+$(document).on("click", ".chat-item", function(){
     //Verifico che l'elemento cliccato non sia già la classe corrente, e se non lo è procedo con il cambio di chat_answers
     if (!$(this).hasClass("current")) {
         //Sposto la classe corrente alla nuova chat attivata
@@ -132,31 +121,7 @@ $(".chat-item").click(function(){
         //Creo un ciclo for per ripubblicare in sequenza tutti gli elementi nella conversazione
         nth_current_chat = $(this).index();
 
-        for (var i = 0; i < conversation_log[nth_current_chat].length; i++) {
-            //verifico se il messaggio è ricevuto o mandato e lo inserisco
-            if (conversation_log[nth_current_chat][i][2] == ".chat-right") {
-                var elementToAdd = $(".template .chat-utente").clone();
-                var messageToAdd = conversation_log[nth_current_chat][i][0];
-                var timeMessageToAdd = conversation_log[nth_current_chat][i][1];
-
-                //Preparo il messaggio con HTML e lo aggiungo alla chat
-                elementToAdd.find(".message-text").text(messageToAdd);
-                elementToAdd.find("p.chat-time-message").text(timeMessageToAdd);
-                elementToAdd.addClass("chat-right");
-                elementToAdd.appendTo("#container-chat-box");
-            } else {
-                var elementToAdd = $(".template .chat-utente").clone();
-                var messageToAdd = conversation_log[nth_current_chat][i][0];
-                var timeMessageToAdd = conversation_log[nth_current_chat][i][1];
-
-                //Preparo il messaggio con HTML e lo aggiungo alla chat
-                elementToAdd.find(".message-text").text(messageToAdd);
-                elementToAdd.find("p.chat-time-message").text(timeMessageToAdd);
-                elementToAdd.addClass("chat-left");
-                elementToAdd.appendTo("#container-chat-box");
-            }
-        }
-
+        printChat(nth_current_chat);
     }
 })
 
@@ -203,34 +168,10 @@ $(document).on("click", ".message-hidden-menu p:nth-child(2)", function(){
 
     //Rimuovo il messaggio dal conversation_log
     conversation_log[nth_current_chat].splice(chat_element_index, 1);
-    console.log(conversation_log);
 
     //Svuoto la chat e ricarico gli elementi della pagina dopo la cancellazione
     $("#container-chat-box").html("");
-    for (var i = 0; i < conversation_log[nth_current_chat].length; i++) {
-        //verifico se il messaggio è ricevuto o mandato e lo inserisco
-        if (conversation_log[nth_current_chat][i][2] == ".chat-right") {
-            var elementToAdd = $(".template .chat-utente").clone();
-            var messageToAdd = conversation_log[nth_current_chat][i][0];
-            var timeMessageToAdd = conversation_log[nth_current_chat][i][1];
-
-            //Preparo il messaggio con HTML e lo aggiungo alla chat
-            elementToAdd.find(".message-text").text(messageToAdd);
-            elementToAdd.find("p.chat-time-message").text(timeMessageToAdd);
-            elementToAdd.addClass("chat-right");
-            elementToAdd.appendTo("#container-chat-box");
-        } else {
-            var elementToAdd = $(".template .chat-utente").clone();
-            var messageToAdd = conversation_log[nth_current_chat][i][0];
-            var timeMessageToAdd = conversation_log[nth_current_chat][i][1];
-
-            //Preparo il messaggio con HTML e lo aggiungo alla chat
-            elementToAdd.find(".message-text").text(messageToAdd);
-            elementToAdd.find("p.chat-time-message").text(timeMessageToAdd);
-            elementToAdd.addClass("chat-left");
-            elementToAdd.appendTo("#container-chat-box");
-        }
-    }
+    printChat(nth_current_chat);
 });
 
 //FUNZIONI
@@ -241,39 +182,35 @@ function addTextInChat() {
 
     //Registro l'ora corrente
     var d = new Date();
-    var currentHour = d.getHours();
-    var currentMinute = d.getMinutes();
-    if (currentMinute < 10) {
-        currentMinute = "0" + currentMinute;
-    }
-    var currentTime = currentHour + ":" + currentMinute;
+    var message_time = getHHMM(d);
 
     //Preparo il messaggio con HTML e lo aggiungo alla chat
     elementToAdd.find(".message-text").text(messageToAdd);
-    elementToAdd.find("p.chat-time-message").text(currentTime);
+    elementToAdd.find("p.chat-time-message").text(message_time);
     elementToAdd.addClass("chat-right");
     elementToAdd.appendTo("#container-chat-box");
 
 
     //Aggiorno il conversation_log col messaggio inviato
-    var arrayToAdd = [messageToAdd, currentTime, ".chat-right"];
+    var arrayToAdd = [messageToAdd, d, ".chat-right"];
     conversation_log[nth_current_chat].push(arrayToAdd);
 
     //Prendo un messaggio casuale dall'array delle risposte e lo aggiungo come risposta dell'altro utente, con un ritardo di 1 minuto
     var random_answer = chat_answers[getRandom(0, (chat_answers.length - 1))];
     var answerToAdd =  $(".template .chat-utente").clone();
     answerToAdd.find(".message-text").text(random_answer);
-    answerToAdd.find("p.chat-time-message").text(currentTime);
+    answerToAdd.find("p.chat-time-message").text(message_time);
     answerToAdd.addClass("chat-left");
     setTimeout (function(){
         answerToAdd.appendTo("#container-chat-box");
         //Aggiorno il conversation_log con la risposta
-        var arrayAnswerToAdd = [random_answer, currentTime, ".chat-left"];
+        var arrayAnswerToAdd = [random_answer, d, ".chat-left"];
         conversation_log[nth_current_chat].push(arrayAnswerToAdd);
+        //Aggiorno la lista contatti per avere la preview dei messaggi corretta
+        printAccounts(account_list, conversation_log);
+        // //Riaggiungo la classe active alla chat corrente
+        $(".chat-item[data-id=" + nth_current_chat + "]").addClass("current");
     }, 1000);
-
-
-    console.log(conversation_log);
 
     //Ripristino il pulsante microfono fino a prossimo focus su box
     $(".text-box .fa-microphone").show();
@@ -281,9 +218,76 @@ function addTextInChat() {
 
     //Svuoto il contenuto dell'input
     $("#write-text-box").val("");
+
+    console.log(conversation_log);
 }
 
 //Funzione per generare un numero casuale
 function getRandom(min, max) {
   return Math.floor(Math.random() * (max - min + 1) ) + min;
+}
+
+//Funzione per generare l'ora in una stringa con formato HH:MM
+function getHHMM(actual_date) {
+    var currentHour = actual_date.getHours();
+    var currentMinute = actual_date.getMinutes();
+    if (currentMinute < 10) {
+        currentMinute = "0" + currentMinute;
+    }
+    var currentTime = currentHour + ":" + currentMinute;
+    return currentTime;
+}
+
+//Funzione per stampare gli account
+function printAccounts() {
+    //Svuoto l'elenco dei CONTATTI
+    $("#chat-item-container").text("");
+    //Stampo di nuovo la lista
+    for (var i = 0; i < account_list.length; i++) {
+        //Clono l'elemento account dai template e lo aggiorno col nome e l'immagine corretta
+        var accountToAdd = $(".template .chat-item").clone();
+        accountToAdd.find(".preview-name p").text(account_list[i][0]);
+        accountToAdd.find(".portrait img").attr("src", account_list[i][1]);
+        accountID = account_list[i][2];
+        accountToAdd.attr("data-id",accountID);
+
+        //Aggiungo come preview l'ultimo messaggio pubblicato
+        var total_messages = (conversation_log[i].length) - 1;
+        accountToAdd.find(".preview-message p").text(conversation_log[accountID][total_messages][0]);
+        //Metto l'ora dell'ultimo messaggio pubblicato
+        var lastMessageTime = new Date(conversation_log[accountID][total_messages][1]);
+        var timeText = getHHMM(lastMessageTime);
+        accountToAdd.find(".preview-time p").text(timeText);
+
+        //Aggiungo il contatto nel box degli account
+        accountToAdd.appendTo("#chat-item-container");
+    }
+}
+
+//Funzione per stampare tutta una conversazione
+function printChat(nthConv) {
+    for (var i = 0; i < conversation_log[nthConv].length; i++) {
+        //verifico se il messaggio è ricevuto o mandato e lo inserisco
+        if (conversation_log[nthConv][i][2] == ".chat-right") {
+            var elementToAdd = $(".template .chat-utente").clone();
+            var messageToAdd = conversation_log[nthConv][i][0];
+            var timeMessageToAdd = new Date(conversation_log[nthConv][i][1]);
+            var hhmmTime = getHHMM(timeMessageToAdd);
+
+            //Preparo il messaggio con HTML e lo aggiungo alla chat
+            elementToAdd.find(".message-text").text(messageToAdd);
+            elementToAdd.find("p.chat-time-message").text(hhmmTime);
+            elementToAdd.addClass("chat-right");
+            elementToAdd.appendTo("#container-chat-box");
+        } else {
+            var elementToAdd = $(".template .chat-utente").clone();
+            var messageToAdd = conversation_log[nthConv][i][0];
+
+            //Preparo il messaggio con HTML e lo aggiungo alla chat
+            elementToAdd.find(".message-text").text(messageToAdd);
+            elementToAdd.find("p.chat-time-message").text(hhmmTime);
+            elementToAdd.addClass("chat-left");
+            elementToAdd.appendTo("#container-chat-box");
+        }
+    }
 }
