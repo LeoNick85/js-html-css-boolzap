@@ -5,6 +5,7 @@
         <script src="https://kit.fontawesome.com/7220c352f8.js" crossorigin="anonymous"></script>
         <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
         <link rel="stylesheet" href="style.css">
         <title>Esercitazione #28 - Boolzapp Web</title>
     </head>
@@ -72,38 +73,41 @@
                 </div>
             </div>
         </main>
-
-        <div class="template">
-            <div class="chat-utente">
-                <p class="message-text">Placeholder message</p>
-                <p class="chat-time-message">00:00</p>
-                <i class="fas fa-angle-down"></i>
-                <div class="message-hidden-menu">
-                    <p>Message Info</p>
-                    <p>Delete Message</p>
-                </div>
+<!-- template HTML -->
+    <script id="chat-utente-template" type="text/x-handlebars-template">
+        <div class="chat-utente {{position}}">
+            <p class="message-text">{{text}}</p>
+            <p class="chat-time-message">{{time}}</p>
+            <i class="fas fa-angle-down"></i>
+            <div class="message-hidden-menu">
+                <p>Message Info</p>
+                <p>Delete Message</p>
             </div>
-            <div class="chat-item" data-id="0">
-                <div class="chat-preview">
-                    <div class="portrait">
-                        <img src="https://findicons.com/files/icons/1072/face_avatars/300/e05.png" alt="Avatar">
+        </div>
+    </script>
+    <script id="chat-item-template" type="text/x-handlebars-template">
+        <div class="chat-item" data-id="{{id}}">
+            <div class="chat-preview">
+                <div class="portrait">
+                    <img src={{urlimg}} alt="Avatar">
+                </div>
+                <div class="preview-wrapper">
+                    <div class="preview-name-time">
+                        <div class="preview-name">
+                            <p>{{username}}</p>
+                        </div>
+                        <div class="preview-time">
+                            <p>{{time}}</p>
+                        </div>
                     </div>
-                    <div class="preview-wrapper">
-                        <div class="preview-name-time">
-                            <div class="preview-name">
-                                <p>Minsc</p>
-                            </div>
-                            <div class="preview-time">
-                                <p>08:10</p>
-                            </div>
-                        </div>
-                        <div class="preview-message">
-                            <p>Hai visto Boo?</p>
-                        </div>
+                    <div class="preview-message">
+                        <p>{{preview}}</p>
                     </div>
                 </div>
             </div>
         </div>
+    </script>
+<!-- JS script -->
         <script src="main.js" charset="utf-8"></script>
     </body>
 </html>

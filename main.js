@@ -187,24 +187,44 @@ function addTextInChat() {
     var message_time = getHHMM(d);
 
     //Preparo il messaggio con HTML e lo aggiungo alla chat
-    elementToAdd.find(".message-text").text(messageToAdd);
-    elementToAdd.find("p.chat-time-message").text(message_time);
-    elementToAdd.addClass("chat-right");
-    elementToAdd.appendTo("#container-chat-box");
+    // elementToAdd.find(".message-text").text(messageToAdd);
+    // elementToAdd.find("p.chat-time-message").text(message_time);
+    // elementToAdd.addClass("chat-right");
+    // elementToAdd.appendTo("#container-chat-box");
 
 
     //Aggiorno il conversation_log col messaggio inviato
     var arrayToAdd = [messageToAdd, d, ".chat-right"];
     conversation_log[nth_current_chat].push(arrayToAdd);
 
+    var new_message = {
+        "text" : messageToAdd,
+        "position" : "chat-right",
+        "time" : message_time
+    }
+    var template_html = $("#chat-utente-template").html();
+
+    var template_function = Handlebars.compile(template_html);
+
+    var html_finale = template_function(new_message);
+    $("#container-chat-box").append(html_finale);
+
     //Prendo un messaggio casuale dall'array delle risposte e lo aggiungo come risposta dell'altro utente, con un ritardo di 1 minuto
     var random_answer = chat_answers[getRandom(0, (chat_answers.length - 1))];
-    var answerToAdd =  $(".template .chat-utente").clone();
-    answerToAdd.find(".message-text").text(random_answer);
-    answerToAdd.find("p.chat-time-message").text(message_time);
-    answerToAdd.addClass("chat-left");
+
+    var new_message = {
+        "text" : random_answer,
+        "position" : "chat-left",
+        "time" : message_time
+    }
+
     setTimeout (function(){
-        answerToAdd.appendTo("#container-chat-box");
+        var template_html = $("#chat-utente-template").html();
+
+        var template_function = Handlebars.compile(template_html);
+
+        var html_finale = template_function(new_message);
+        $("#container-chat-box").append(html_finale);
         //Aggiorno il conversation_log con la risposta
         var arrayAnswerToAdd = [random_answer, d, ".chat-left"];
         conversation_log[nth_current_chat].push(arrayAnswerToAdd);
@@ -247,27 +267,33 @@ function printAccounts() {
 
     //Stampo il primo elemento della lista
     //Clono l'elemento account dai template e lo aggiorno col nome e l'immagine corretta
-    var accountToAdd = $(".template .chat-item").clone();
-    accountToAdd.find(".preview-name p").text(account_list[0][0]);
-    accountToAdd.find(".portrait img").attr("src", account_list[0][1]);
     accountID = account_list[0][2];
-    accountToAdd.attr("data-id",accountID);
 
     //Aggiungo come preview l'ultimo messaggio pubblicato
     var total_messages = (conversation_log[0].length) - 1;
-    accountToAdd.find(".preview-message p").text(conversation_log[accountID][total_messages][0]);
     //Metto l'ora dell'ultimo messaggio pubblicato
     var lastMessageTime = new Date(conversation_log[accountID][total_messages][1]);
 
     var timeText = getHHMM(lastMessageTime);
-    accountToAdd.find(".preview-time p").text(timeText);
 
-    //Aggiungo il contatto nel box degli account
-    accountToAdd.appendTo("#chat-item-container");
+    var new_account = {
+        "username" :  account_list[0][0],
+        "id" : account_list[0][2],
+        "urlimg" : account_list[0][1],
+        "preview": conversation_log[accountID][total_messages][0],
+        "time": timeText
+    }
 
+    var template_html = $("#chat-item-template").html();
+
+    var template_function = Handlebars.compile(template_html);
+
+    var html_finale = template_function(new_account);
+    $("#chat-item-container").append(html_finale);
 
     //Stampo di nuovo la lista a partire dal secondo elemento ordinando gli elementi in base al tempo dell'ultimo messaggio inserito
     for (var i = 1; i < account_list.length; i++) {
+
         //Clono l'elemento account dai template e lo aggiorno col nome e l'immagine corretta
         var accountToAdd = $(".template .chat-item").clone();
         accountToAdd.find(".preview-name p").text(account_list[i][0]);
@@ -283,44 +309,31 @@ function printAccounts() {
         var timeText = getHHMM(lastMessageTime);
         accountToAdd.find(".preview-time p").text(timeText);
 
-        //Aggiungo il contatto nel box degli account nella giusta posizione
-        //Calcolo il contatore orario del messaggio corrente
-        var current_messageCounter = parseInt(lastMessageTime.getFullYear().toString() + lastMessageTime.getMonth().toString() + lastMessageTime.getDate().toString() + lastMessageTime.getHours().toString() + lastMessageTime.getMinutes().toString()+ lastMessageTime.getSeconds().toString());
-        console.log(current_messageCounter);
-        accountToAdd.appendTo("#chat-item-container");
 
+        //Clono l'elemento account dai template e lo aggiorno col nome e l'immagine corretta
+        accountID = account_list[i][2];
 
-        //Uso un ciclo per confrontare il tempo con gli elementi già pubblicati, se il messaggio è più recente pubblico in quella posizione
-        // var nth_account_printed = $("#chat-item-container .chat-item").length;
-        // console.log(nth_account_printed);
-        // var confrontCounter = 0;
-        // do {
-        //     //Seleziono l'elemento da confrontare con l'orario
-        //     var confrontingElement = $("#chat-item-container .chat-item").eq(confrontCounter);
-        //     var confrontingElementID = parseInt(confrontingElement.attr("data-id"));
-        //     var confrontingElementNthMessages = (conversation_log[confrontingElementID].length) - 1;
-        //     var confrontingElementDate = new Date(conversation_log[confrontingElementID][confrontingElementNthMessages][1]);
-        //     console.log(confrontingElementID);
-        //     console.log(confrontingElement);
-        //
-        //     var timeToCheck = parseInt(confrontingElementDate.getFullYear().toString() + confrontingElementDate.getMonth().toString() + confrontingElementDate.getDate().toString() + confrontingElementDate.getHours().toString() + confrontingElementDate.getMinutes().toString()+ confrontingElementDate.getSeconds().toString());
-        //     console.log(timeToCheck);
-        //
-        //     if(current_messageCounter > timeToCheck) {
-        //         console.log(current_messageCounter, timeToCheck, "più recente");
-        //         accountToAdd.insertBefore("#chat-item-container .chat-item:nth-child("+ confrontCounter +")");
-        //         break;
-        //     }
+        //Aggiungo come preview l'ultimo messaggio pubblicato
+        var total_messages = (conversation_log[i].length) - 1;
+        //Metto l'ora dell'ultimo messaggio pubblicato
+        var lastMessageTime = new Date(conversation_log[accountID][total_messages][1]);
 
-            // if (current_messageCounter > timeToCheck) {
-            //     accountToAdd.insertBefore(".chat-item:nth-child("+ confrontCounter +")");
-            //     console.log("aggiungo");
-            //     break;
-            // } else if (current_messageCounter < timeToCheck) {
-            //     confrontCounter++;
-            //     console.log("riprovo");
-            // }
-        // } while ((confrontCounter >= nth_account_printed) && (current_messageCounter < timeToCheck));
+        var timeText = getHHMM(lastMessageTime);
+
+        var new_account = {
+            "username" :  account_list[i][0],
+            "id" : account_list[i][2],
+            "urlimg" : account_list[i][1],
+            "preview": conversation_log[accountID][total_messages][0],
+            "time": timeText
+        }
+
+        var template_html = $("#chat-item-template").html();
+
+        var template_function = Handlebars.compile(template_html);
+
+        var html_finale = template_function(new_account);
+        $("#chat-item-container").append(html_finale);
 
     }
 }
@@ -330,25 +343,41 @@ function printChat(nthConv) {
     for (var i = 0; i < conversation_log[nthConv].length; i++) {
         //verifico se il messaggio è ricevuto o mandato e lo inserisco
         if (conversation_log[nthConv][i][2] == ".chat-right") {
-            var elementToAdd = $(".template .chat-utente").clone();
             var messageToAdd = conversation_log[nthConv][i][0];
             var timeMessageToAdd = new Date(conversation_log[nthConv][i][1]);
             var hhmmTime = getHHMM(timeMessageToAdd);
 
             //Preparo il messaggio con HTML e lo aggiungo alla chat
-            elementToAdd.find(".message-text").text(messageToAdd);
-            elementToAdd.find("p.chat-time-message").text(hhmmTime);
-            elementToAdd.addClass("chat-right");
-            elementToAdd.appendTo("#container-chat-box");
+            var new_message = {
+                "text" :  messageToAdd,
+                "position" : "chat-right",
+                "time" : hhmmTime
+            }
+
+            var template_html = $("#chat-utente-template").html();
+
+            var template_function = Handlebars.compile(template_html);
+
+            var html_finale = template_function(new_message);
+            $("#container-chat-box").append(html_finale);
+
+
+
         } else {
-            var elementToAdd = $(".template .chat-utente").clone();
             var messageToAdd = conversation_log[nthConv][i][0];
 
             //Preparo il messaggio con HTML e lo aggiungo alla chat
-            elementToAdd.find(".message-text").text(messageToAdd);
-            elementToAdd.find("p.chat-time-message").text(hhmmTime);
-            elementToAdd.addClass("chat-left");
-            elementToAdd.appendTo("#container-chat-box");
+            var new_message = {
+                "text" : messageToAdd,
+                "position" : "chat-left",
+                "time" : hhmmTime
+            }
+            var template_html = $("#chat-utente-template").html();
+
+            var template_function = Handlebars.compile(template_html);
+
+            var html_finale = template_function(new_message);
+            $("#container-chat-box").append(html_finale);
         }
     }
 }
